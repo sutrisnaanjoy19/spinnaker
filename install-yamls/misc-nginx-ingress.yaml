@@ -1,0 +1,52 @@
+controller:
+  extraArgs:
+    enable-ssl-passthrough: ""
+  ingressClassResource:
+    name: misc-nginx
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/misc-nginx-ingress-nginx" 
+  containerPort:
+    http: 80
+    https: 443
+
+  config:
+    proxy-request-buffering: 'off'
+    proxy-next-upstream: 'off'
+    disable-access-log: false
+
+  ingressClass: misc-nginx
+
+  kind: Deployment
+
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+
+  nodeSelector:
+    kubernetes.io/os: linux
+    app-type: java-misc
+
+  replicaCount: 0
+
+  service:
+    enabled: true
+
+    annotations:
+      cloud.google.com/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
+
+    enableHttps: true
+
+    externalTrafficPolicy: Local
+
+    healthCheckNodePort: 31000
+
+  # metrics:
+  #   enabled: true
+
+  #   serviceMonitor:
+  #     enabled: true
+  #     namespace: monitoring

@@ -1,0 +1,51 @@
+controller:
+  ingressClassResource:
+    name: internal-spinnaker-poc-nginx
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/internal-ingress-spinnaker-poc-nginx" 
+  containerPort:
+    http: 80
+
+  config:
+    proxy-request-buffering: 'off'
+    proxy-next-upstream: 'off'
+    disable-access-log: true
+
+  ingressClass: spinnaker-poc-nginx
+
+  kind: Deployment
+
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+
+  nodeSelector:
+    app-type: java-misc
+
+  replicaCount: 2
+
+  service:
+    enabled: true
+
+    annotations:
+      cloud.google.com/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
+      cloud.google.com/neg: '{"exposed_ports": {"80":{"name": "spinnaker-poc"}}}'
+
+    enableHttps: false
+
+    externalTrafficPolicy: Local
+
+    healthCheckNodePort: 32100
+
+  metrics:
+    enabled: true
+
+#    serviceMonitor:
+#      enabled: true
+#      namespace: webapps
+
+#https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx add the values.yaml amd the namespace.
