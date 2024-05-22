@@ -1,7 +1,7 @@
 #editing spinnaker endpoint
 hal config security ui edit \
-    --override-base-url http://spinnaker.use1-poc-gke.srv.media.net
+    --override-base-url http://spinnaker.spinnaker.cluster.local
 hal config security api edit \
-    --override-base-url http://spinnaker-api.use1-poc-gke.srv.media.net
+    --override-base-url http://spinnaker-api.spinnaker.cluster.local
 hal config security api edit \
-    --cors-access-pattern http://spinnaker.use1-poc-gke.srv.media.net
+    --cors-access-pattern http://spinnaker.spinnaker.cluster.local

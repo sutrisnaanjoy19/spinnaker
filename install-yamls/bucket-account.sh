@@ -20,13 +20,12 @@
 #     --iam-account $SA_EMAIL
 
 #/home/sutrisna/.gcp/gcs-account.json
-#[e5bad2ba1750ae6a0231c5a653ecd1317c252641]
 
 PROJECT=$(gcloud config get-value project)
 # see https://cloud.google.com/storage/docs/bucket-locations
 BUCKET_LOCATION=us
-BUCKET=spinnaker-use1-poc
-SERVICE_ACCOUNT_DEST="/home/sutrisna/spinnaker/secrets/cm-java-300806-6845bce1b26c.json"
+BUCKET=spinnaker-BUCKET
+SERVICE_ACCOUNT_DEST="/home/sutrisna/spinnaker/secrets/[FILE.JSON]"
 hal config storage gcs edit --project ${PROJECT} \
     --bucket-location ${BUCKET_LOCATION} \
     --json-path ${SERVICE_ACCOUNT_DEST} \

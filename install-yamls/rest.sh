@@ -5,7 +5,7 @@ hal deploy apply
 hal config provider kubernetes account delete spinnaker-account-poc --no-validate
 #add another kubernetes cluster 
 echo "Configuring k8s additional accounts"
-hal config provider kubernetes account add apse1-kube \
+hal config provider kubernetes account add CLUSTER_1 \
 --context CONTEXT_NAME --kubeconfig-file /home/sutrisna/spinnaker/secrets/kubeconfig-poc.yaml \
 --omit-namespaces kube-system,kube-public,kube-node-lease,misc-nginx,opencost,monitoring,pvm-control,spring-nginx --provider-version v2
 
@@ -16,7 +16,7 @@ hal config security authn oauth2 edit --provider google \
 
 hal config security authn oauth2 enable
 
-hal config security authn oauth2 edit --pre-established-redirect-uri http://spinnaker-api.use1-poc-gke.srv.media.net/
+hal config security authn oauth2 edit --pre-established-redirect-uri http://spinnaker-api.spinnaker.cluster.local/
 
 #gitlab integration
 TOKEN_FILE="/home/sutrisna/Desktop/spinnaker-gitlab/spinnaker/secrets/gitlab-token"
